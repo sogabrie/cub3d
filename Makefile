@@ -8,9 +8,9 @@ LIBS = -I./includes/
 INCLUDE = -I /usr/local/include
 
 #	42
-MLX = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+# MLX = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 #	Home
-# MLX = -L. -lmlx -framework OpenGL -framework AppKit
+MLX = -L. -lmlx -framework OpenGL -framework AppKit
 
 #	Libft
 LIBFT_DIR = ./libft
@@ -31,6 +31,7 @@ SRCS = ${foreach dir, ${SRC_DIR}, ${wildcard $(dir)/*.c}}
 OBJS = ${subst ${SRC}, ${OBJ}, ${SRCS:.c=.o}}
 HEADER_DIR = ${shell find ./includes -name '*.h' -type f}
 
+# 	Compile Part
 all : ${NAME}
 bonus : all
 

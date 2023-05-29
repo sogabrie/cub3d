@@ -3,11 +3,13 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
 # include "libft.h"
 
 //  42
-# include <mlx.h>
+// # include <mlx.h>
 // HOME
-// # include "mlx.h"
+# include "mlx.h"
 
 #endif
