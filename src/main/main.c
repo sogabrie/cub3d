@@ -1,26 +1,29 @@
 #include "miniRT.h"
 
-#define E_ARGC_1 "Error\n! Please specify the .rt file !\n"
-#define W_ARGC_2 "! Only the first argument is considered !\n"
+// void	permissible_parameters(char *file_name)
+// {
+// 	int		fd;
+// 	char	*str;
+// 	int		f_empty;
 
-int	check_rt(char *arg, char *rt)
-{
-	size_t	len_arg;
-	size_t	len_rt;
-
-	len_arg = ft_strlen(arg);
-	len_rt = ft_strlen(rt);
-	if (len_arg == len_rt)
-		return (1);
-	while (len_rt > 0)
-	{
-		--len_arg;
-		--len_rt;
-		if (arg[len_arg] != rt[len_rt])
-			return (1);
-	}
-	return (0);
-}
+// 	f_empty = 0;
+// 	fd = open_file(file_name);
+// 	while (1)
+// 	{
+// 		str = get_next_line(fd);
+// 		if (!str)
+// 			break ;
+// 		if (str[0] == '\n')
+// 		{
+// 			free(str);
+// 			continue ;
+// 		}
+// 		//check &f_empty = 1;
+// 		free(str);
+// 	}
+// 	if (!f_empty)
+// 		exit(printf(E_FILE_EMPTY));
+// }
 
 int	parsing_file(int argc, char *argv)
 {
@@ -28,7 +31,7 @@ int	parsing_file(int argc, char *argv)
 		return (printf(E_ARGC_1));
 	if (argc > 2)
 		printf(W_ARGC_2);
-	
+	// permissible_parameters(argv);
 	return (0);
 }
 
