@@ -30,6 +30,7 @@ void	*ft_memcpy(void *a, const void *b, size_t s);
 void	*ft_memmove(void *a, const void *b, size_t s);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
+char	**ft_strcat(char **map, char **new_map, size_t i);
 int		ft_toupper(int a);
 int		ft_tolower(int a);
 char	*ft_strchr(const char *s, int c);
