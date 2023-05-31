@@ -1,5 +1,5 @@
 #	Main Variables
-NAME = miniRT
+NAME = cub3D
 FLAGS = -Wall -Wextra -Werror
 CC = cc
 RM = rm -rf
