@@ -1,29 +1,113 @@
 #include "cub3D.h"
 
-void	save_parameters(int fd, t_data_segment *data)
+int	unprinted(char *str)
 {
-	char		*tmp;
-	static int	check[6];
+	size_t	i;
 
-	while (!check_end(check))
-	{	
-		tmp = get_next_line(fd);
-		if (tmp == NULL)
-			break ;
-		if (tmp[0] == '\n')
-		{
-			free(tmp);
-			continue ;
-		}
-		param_check(data, tmp, check, 0);
-		free(tmp);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (!((str[i] >= 0 && str[i] <= 32) || (str[i] == 127)))
+			return (0);
+		i++;
 	}
-	// if (!check_end(check))
-	// 	exit(printf(E_CONFIGURATION));
+	return (1);
+}
+
+size_t	counts(char **map)
+{
+	size_t	size;
+	size_t	size_new;
+
+	size = 0;
+	size_new = 0;
+	while (map[size])
+	{
+		if (!unprinted(map[size]))
+			size_new++;
+		size++;
+	}
+	return (size_new);
+}
+
+char	**optimisation_map(char **map)
+{
+	char	**new_map;
+	size_t	size;
+	size_t	size_new;
+
+	size_new = counts(map);
+	new_map = malloc(sizeof(char *) * (size_new + 1));
+	if (new_map == NULL)
+		exit(printf(E_CONFIGURATION));
+	size = 0;
+	size_new = 0;
+	while (map[size])
+	{
+		if (!unprinted(map[size]))
+			new_map[size_new++] = map[size];
+		else
+			free(map[size]);
+		size++;
+	}
+	new_map[size_new] = NULL;
+	free(map);
+	return (new_map);
+}
+
+int	divided_map(char **map)
+{
+	size_t	start;
+
+	start = 0;
+	while (unprinted(map[start]))
+		start++;
+	while (map[start])
+	{
+		if (!unprinted(map[start]))
+			start++;
+		else
+			break ;
+	}
+	while (map[start])
+	{
+		if (unprinted(map[start]))
+			start++;
+		else
+			break ;
+	}
+	if (map[start] != NULL)
+		return (1);
+	return (0);
+}
+
+void	save_map(int fd, t_data_segment *data)
+{
+	size_t	i;
+	char	**new_map;
+	char	**map;
+
+	i = 0;
+	map = NULL;
+	while (1)
+	{
+		new_map = malloc(sizeof(char *) * (i + 2));
+		if (new_map == NULL)
+			exit(printf(E_MALLOC));
+		new_map[i + 1] = NULL;
+		map = ft_strcat(map, new_map, i);
+		map[i] = get_next_line(fd);
+		printf("%s\n", map[i]);
+		if (map[i] == NULL)
+			break ;
+		i++;
+	}
+	// Segmentation ..
 	// ..
-	// wait..
-	// Create map..
-	// ..
+	if (divided_map(map))
+		exit(printf(E_CONFIGURATION));
+	map = optimisation_map(map);
+	data->map = map;
 }
 
 int	pars_part(int argc, char *argv, t_data_segment **data)
@@ -36,6 +120,10 @@ int	pars_part(int argc, char *argv, t_data_segment **data)
 		printf(W_ARGC_2);
 	fd = open_file(argv);
 	save_parameters(fd, *data);
+	save_map(fd, *data);
+	// .. 
+	// pars_map ..
+	// ..
 	close(fd);
 	return (0);
 }
@@ -50,11 +138,13 @@ int	main(int argc, char *argv[])
 	if (pars_part(argc, argv[1], &data))
 		return (1);
 	// system("leaks cub3D");
-	// printf("data.options.north_texture = %s", data->options.north_texture);
-	// printf("data.options.south_texture = %s", data->options.south_texture);
-	// printf("data.options.west_texture = %s", data->options.west_texture);
-	// printf("data.options.east_texture = %s", data->options.east_texture);
+	// printf("data.options.north_texture = %s\n", data->options.north_texture);
+	// printf("data.options.south_texture = %s\n", data->options.south_texture);
+	// printf("data.options.west_texture = %s\n", data->options.west_texture);
+	// printf("data.options.east_texture = %s\n", data->options.east_texture);
 	// printf("floor : %d %d %d\n", data->options.floor.red, data->options.floor.green, data->options.floor.blue);
 	// printf("ceiling : %d %d %d\n", data->options.ceiling.red, data->options.ceiling.green, data->options.ceiling.blue);
+	// for(int i = 0; data->map[i]; i++)
+	// 	printf("%s", data->map[i]);
 	return (0);
 }

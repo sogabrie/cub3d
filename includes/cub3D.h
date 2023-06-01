@@ -23,6 +23,7 @@ void	param_check(t_data_segment *data, char *str, int check[6], int status);
 void	adding(t_colors *data, char **colors);
 int		add_color(int num, int check[6], t_colors *color, char *options);
 int		add_param(int num, int check[6], char **str, char *path);
+void	save_parameters(int fd, t_data_segment *data);
 
 //  Utils
 int		check_end(int check[6]);
