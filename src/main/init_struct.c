@@ -24,7 +24,11 @@ int	add_color(int num, int check[6], t_colors *color, char *options)
 	if (colors == NULL)
 		exit(printf(E_MALLOC));
 	while (colors[count])
+	{
+		if (ft_strlen(colors[count]) > 4)
+			exit(printf(E_CONFIGURATION));
 		count++;
+	}
 	if (count != 3)
 		exit(printf(E_CONFIGURATION));
 	adding(color, colors);
@@ -68,4 +72,30 @@ void	save_parameters(int fd, t_data_segment *data)
 	}
 	if (!check_end(check))
 		exit(printf(E_CONFIGURATION));
+}
+
+void	save_map(int fd, t_data_segment *data)
+{
+	size_t	i;
+	char	**new_map;
+	char	**map;
+
+	i = 0;
+	map = NULL;
+	while (1)
+	{
+		new_map = malloc(sizeof(char *) * (i + 2));
+		if (new_map == NULL)
+			exit(printf(E_MALLOC));
+		new_map[i + 1] = NULL;
+		map = ft_strcat(map, new_map, i);
+		map[i] = get_next_line(fd);
+		if (map[i] == NULL)
+			break ;
+		i++;
+	}
+	if (check_map(map) || divided_map(map))
+		exit(printf(E_CONFIGURATION));
+	map = optimisation_map(map);
+	data->map = map;
 }
