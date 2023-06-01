@@ -52,15 +52,14 @@ void	color_options(char *options)
 		exit(printf(E_CONFIGURATION));
 }
 
-void	param_check(t_data_segment *data, char *str, int check[6])
+void	param_check(t_data_segment *data, char *str, int check[6], int status)
 {
 	char	**tmp;
-	int		status;
 
 	tmp = ft_split(str, ' ');
+	count_tmp(tmp);
 	if (tmp == NULL || tmp[0] == NULL)
 		exit(printf(E_MALLOC));
-	status = 0;
 	if (ft_strcmp(tmp[0], "NO") == 0 && check[0] != 1)
 		status = add_param(0, check, &(data->options.north_texture), tmp[1]);
 	if (ft_strcmp(tmp[0], "SO") == 0 && check[1] != 1)
@@ -69,9 +68,9 @@ void	param_check(t_data_segment *data, char *str, int check[6])
 		status = add_param(2, check, &(data->options.west_texture), tmp[1]);
 	if (ft_strcmp(tmp[0], "EA") == 0 && check[3] != 1)
 		status = add_param(3, check, &(data->options.east_texture), tmp[1]);
-	if (ft_strchr(tmp[0], 'F'))
+	if (ft_strchr(tmp[0], 'F') && check[4] != 1)
 		status = add_color(4, check, &(data->options.floor), tmp[1]);
-	if (ft_strchr(tmp[0], 'C'))
+	if (ft_strchr(tmp[0], 'C') && check[5] != 1)
 		status = add_color(5, check, &(data->options.ceiling), tmp[1]);
 	if (status != 1)
 	{

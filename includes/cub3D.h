@@ -17,7 +17,7 @@
 int		open_file(char *file_name);
 int		check_cub(char *arg, char *cub);
 void	color_options(char *options);
-void	param_check(t_data_segment *data, char *str, int check[6]);
+void	param_check(t_data_segment *data, char *str, int check[6], int status);
 
 //  Init struct
 void	adding(t_colors *data, char **colors);
@@ -26,6 +26,7 @@ int		add_param(int num, int check[6], char **str, char *path);
 
 //  Utils
 int		check_end(int check[6]);
+void	count_tmp(char **tmp);
 
 //  Free functions
 void	two_dimensional_mas(char ***str);

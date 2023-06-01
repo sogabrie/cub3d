@@ -39,6 +39,8 @@ int	add_param(int num, int check[6], char **str, char *path)
 		exit(printf(E_CONFIGURATION));
 	if (!(path[0] == '.' && path[1] == '/'))
 		exit(printf(E_CONFIGURATION));
+	if (path[2] == '\n' || path[2] == '\0')
+		exit(printf(E_CONFIGURATION));
 	*str = ft_strdup(path);
 	if (*str == NULL)
 		exit(printf(E_MALLOC));

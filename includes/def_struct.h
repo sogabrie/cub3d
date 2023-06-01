@@ -7,7 +7,7 @@
 # define W_ARGC_2 "Warning\n! Only the first argument is considered !\n"
 # define E_OPEN_FILE "Error\n! It was not possible to open the file !\n"
 # define E_FILE_EMPTY "Error\n! .cub file is empty !\n"
-# define E_CONFIGURATION "Error\n! wrong file configuration !\n"
+# define E_CONFIGURATION "Error\n! Wrong file configuration !\n"
 
 typedef struct s_colors {
 	int	red;

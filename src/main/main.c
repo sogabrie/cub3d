@@ -15,11 +15,11 @@ void	save_parameters(int fd, t_data_segment *data)
 			free(tmp);
 			continue ;
 		}
-		param_check(data, tmp, check);
+		param_check(data, tmp, check, 0);
 		free(tmp);
 	}
-	if (!check_end(check))
-		exit(printf(E_CONFIGURATION));
+	// if (!check_end(check))
+	// 	exit(printf(E_CONFIGURATION));
 	// ..
 	// wait..
 	// Create map..

@@ -13,3 +13,14 @@ int	check_end(int check[6])
 	}
 	return (1);
 }
+
+void	count_tmp(char **tmp)
+{
+	int	count;
+
+	count = 0;
+	while (tmp[count])
+		count++;
+	if (count != 2)
+		exit(printf(E_CONFIGURATION));
+}
