@@ -8,6 +8,7 @@
 # define E_OPEN_FILE "Error\n! It was not possible to open the file !\n"
 # define E_FILE_EMPTY "Error\n! .cub file is empty !\n"
 # define E_CONFIGURATION "Error\n! Wrong file configuration !\n"
+# define E_MAP_CONF "Error\n! Incorrect map configuration !\n"
 
 typedef struct s_colors {
 	int	red;

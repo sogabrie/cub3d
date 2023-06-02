@@ -1,5 +1,10 @@
 #include "cub3D.h"
 
+int	pars_map(int fd, char **map)
+{
+	return (0);
+}
+
 int	pars_part(int argc, char *argv, t_data_segment **data)
 {
 	int	fd;
@@ -11,9 +16,8 @@ int	pars_part(int argc, char *argv, t_data_segment **data)
 	fd = open_file(argv);
 	save_parameters(fd, *data);
 	save_map(fd, *data);
-	// .. 
-	// pars_map ..
-	// ..
+	if (pars_map(fd, (*data)->map))
+		exit(printf(E_MAP_CONF));
 	close(fd);
 	return (0);
 }
@@ -34,7 +38,7 @@ int	main(int argc, char *argv[])
 	// printf("data.options.east_texture = %s\n", data->options.east_texture);
 	// printf("floor : %d %d %d\n", data->options.floor.red, data->options.floor.green, data->options.floor.blue);
 	// printf("ceiling : %d %d %d\n", data->options.ceiling.red, data->options.ceiling.green, data->options.ceiling.blue);
-	// for(int i = 0; data->map[i]; i++)
-	// 	printf("%s", data->map[i]);
+	for(int i = 0; data->map[i]; i++)
+		printf("%s", data->map[i]);
 	return (0);
 }
