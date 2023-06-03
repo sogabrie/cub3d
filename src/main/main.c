@@ -1,7 +1,65 @@
 #include "cub3D.h"
 
-int	pars_map(int fd, char **map)
+int	y_counts(char **map)
 {
+	int	count;
+
+	count = 0;
+	while (map[count])
+		count++;
+	return (count);
+}
+
+int	first_last_y(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (!ft_strchr(" 1\n", str[i]))
+			return (1);
+	return (0);
+}
+
+int	check_walls(char **map, int i, int j)
+{
+	if (map[i + 1][j] == ' ' || map[i + 1][j] == '\n'
+		|| map[i + 1][j] == '\0')
+		return (1);
+	if (map[i - 1][j] == ' ' || map[i - 1][j] == '\n'
+		|| map[i - 1][j] == '\0')
+		return (1);
+	if (map[i][j + 1] == ' ' || map[i][j + 1] == '\n'
+		|| map[i][j + 1] == '\0')
+		return (1);
+	if (map[i][j - 1] == ' ' || map[i][j - 1] == '\n'
+		|| map[i][j - 1] == '\0')
+			return (1);
+	return (0);
+}
+
+int	pars_map(char **map)
+{
+	int	count;
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	count = y_counts(map);
+	if (first_last_y(map[0]) || first_last_y(map[count - 1]))
+		return (1);
+	while (++i < count - 1)
+	{
+		while (map[i][++j])
+		{
+			if (!ft_strchr("10 NSEWD\n", map[i][j]))
+				return (1);
+			if (ft_strchr("0NSEWD", map[i][j]) && check_walls(map, i, j))
+				return (1);
+		}
+		j = -1;
+	}
 	return (0);
 }
 
@@ -16,7 +74,7 @@ int	pars_part(int argc, char *argv, t_data_segment **data)
 	fd = open_file(argv);
 	save_parameters(fd, *data);
 	save_map(fd, *data);
-	if (pars_map(fd, (*data)->map))
+	if (pars_map((*data)->map))
 		exit(printf(E_MAP_CONF));
 	close(fd);
 	return (0);
