@@ -41,7 +41,8 @@ int	add_param(int num, int check[6], char **str, char *path)
 {
 	if (path == NULL)
 		exit(printf(E_CONFIGURATION));
-	if (!(path[0] == '.' && path[1] == '/'))
+	if (!(path[0] == '.' && path[1] == '/') || check_cub(path, ".xpm\n")
+		|| !ft_strcmp("./.xpm\n", path))
 		exit(printf(E_CONFIGURATION));
 	if (path[2] == '\n' || path[2] == '\0')
 		exit(printf(E_CONFIGURATION));
