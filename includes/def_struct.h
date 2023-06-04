@@ -29,6 +29,8 @@ typedef struct s_options {
 typedef struct s_data_segment {
 	char		**map;
 	t_options	options;
+	int			y_axis;
+	int			x_axis;
 	// ..
 	// Continue..
 	// ..

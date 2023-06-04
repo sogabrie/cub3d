@@ -23,6 +23,9 @@ int	first_last_y(char *str)
 
 int	check_walls(char **map, int i, int j)
 {
+	// if(map[i][j] == '0' && j == 0)
+	// 	return (1);
+	// stugel indexov erkarutyuny
 	if (map[i + 1][j] == ' ' || map[i + 1][j] == '\n'
 		|| map[i + 1][j] == '\0')
 		return (1);
@@ -34,25 +37,27 @@ int	check_walls(char **map, int i, int j)
 		return (1);
 	if (map[i][j - 1] == ' ' || map[i][j - 1] == '\n'
 		|| map[i][j - 1] == '\0')
-			return (1);
+		return (1);
 	return (0);
 }
 
-int	pars_map(char **map)
+int	pars_map(char **map, int i, int j)
 {
 	int	count;
-	int	i;
-	int	j;
+	int	c_count;
 
-	i = -1;
-	j = -1;
+	c_count = 0;
 	count = y_counts(map);
 	if (first_last_y(map[0]) || first_last_y(map[count - 1]))
 		return (1);
 	while (++i < count - 1)
 	{
+		if (c_count > 1)
+			return (1);
 		while (map[i][++j])
 		{
+			if (ft_strchr("NSEW	", map[i][j]))
+				c_count++;
 			if (!ft_strchr("10 NSEWD\n", map[i][j]))
 				return (1);
 			if (ft_strchr("0NSEWD", map[i][j]) && check_walls(map, i, j))
@@ -60,6 +65,8 @@ int	pars_map(char **map)
 		}
 		j = -1;
 	}
+	if (c_count == 0)
+		return (1);
 	return (0);
 }
 
@@ -74,7 +81,7 @@ int	pars_part(int argc, char *argv, t_data_segment **data)
 	fd = open_file(argv);
 	save_parameters(fd, *data);
 	save_map(fd, *data);
-	if (pars_map((*data)->map))
+	if (pars_map((*data)->map, -1, -1))
 		exit(printf(E_MAP_CONF));
 	close(fd);
 	return (0);
@@ -89,14 +96,14 @@ int	main(int argc, char *argv[])
 		exit(printf(E_MALLOC));
 	if (pars_part(argc, argv[1], &data))
 		return (1);
-	system("leaks cub3D");
-	printf("data.options.north_texture = %s\n", data->options.north_texture);
-	printf("data.options.south_texture = %s\n", data->options.south_texture);
-	printf("data.options.west_texture = %s\n", data->options.west_texture);
-	printf("data.options.east_texture = %s\n", data->options.east_texture);
-	printf("floor : %d %d %d\n", data->options.floor.red, data->options.floor.green, data->options.floor.blue);
-	printf("ceiling : %d %d %d\n", data->options.ceiling.red, data->options.ceiling.green, data->options.ceiling.blue);
-	for(int i = 0; data->map[i]; i++)
-		printf("%s", data->map[i]);
+	// system("leaks cub3D");
+	// printf("data.options.north_texture = %s\n", data->options.north_texture);
+	// printf("data.options.south_texture = %s\n", data->options.south_texture);
+	// printf("data.options.west_texture = %s\n", data->options.west_texture);
+	// printf("data.options.east_texture = %s\n", data->options.east_texture);
+	// printf("floor : %d %d %d\n", data->options.floor.red, data->options.floor.green, data->options.floor.blue);
+	// printf("ceiling : %d %d %d\n", data->options.ceiling.red, data->options.ceiling.green, data->options.ceiling.blue);
+	// for(int i = 0; data->map[i]; i++)
+	// 	printf("%s", data->map[i]);
 	return (0);
 }
