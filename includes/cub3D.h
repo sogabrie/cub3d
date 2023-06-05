@@ -9,15 +9,17 @@
 # include "def_struct.h"
 
 //  42
-# include <mlx.h>
+// # include <mlx.h>
 // HOME
-// # include "mlx.h"
+# include "mlx.h"
 
 //  Pars part
 int		open_file(char *file_name);
 int		check_cub(char *arg, char *cub);
 void	color_options(char *options);
 void	param_check(t_data_segment *data, char *str, int check[6], int status);
+int		pars_map(char **map, int i, int j);
+int		check_walls(char **map, int i, int j);
 
 //  Pars utils
 int		unprinted(char *str);
@@ -25,6 +27,9 @@ size_t	counts(char **map);
 char	**optimisation_map(char **map);
 int		divided_map(char **map);
 int		check_map(char **map);
+int		y_counts(char **map);
+int		first_last_y(char *str);
+int		max_x_axis(char **map);
 
 //  Init struct
 void	adding(t_colors *data, char **colors);

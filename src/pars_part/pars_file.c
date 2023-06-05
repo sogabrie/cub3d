@@ -79,3 +79,22 @@ void	param_check(t_data_segment *data, char *str, int check[6], int status)
 	}
 	two_dimensional_mas(&tmp);
 }
+
+int	pars_part(int argc, char *argv, t_data_segment **data)
+{
+	int	fd;
+
+	if (argc == 1 || check_cub(argv, ".cub"))
+		return (printf(E_ARGC_1));
+	if (argc > 2)
+		printf(W_ARGC_2);
+	fd = open_file(argv);
+	save_parameters(fd, *data);
+	save_map(fd, *data);
+	if (pars_map((*data)->map, -1, -1))
+		exit(printf(E_MAP_CONF));
+	(*data)->y_axis = y_counts((*data)->map);
+	(*data)->x_axis = max_x_axis((*data)->map);
+	close(fd);
+	return (0);
+}
