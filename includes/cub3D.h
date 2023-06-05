@@ -20,6 +20,7 @@ void	color_options(char *options);
 void	param_check(t_data_segment *data, char *str, int check[6], int status);
 int		pars_map(char **map, int i, int j);
 int		check_walls(char **map, int i, int j);
+int		pars_part(int argc, char *argv, t_data_segment **data);
 
 //  Pars utils
 int		unprinted(char *str);

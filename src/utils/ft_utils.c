@@ -17,10 +17,16 @@ int	check_end(int check[6])
 void	count_tmp(char **tmp)
 {
 	int	count;
+	int	i;
 
+	i = 0;
 	count = 0;
-	while (tmp[count])
-		count++;
+	while (tmp[i])
+	{
+		if (!unprinted(tmp[i]))
+			count++;
+		i++;
+	}
 	if (count != 2)
 		exit(printf(E_CONFIGURATION));
 }

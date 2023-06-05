@@ -40,7 +40,7 @@ void	color_options(char *options)
 		exit(printf(E_CONFIGURATION));
 	while (options[++i])
 	{
-		if (options[i] == ',')
+		if (options[i] == ',' && options[i + 1] != '\n')
 		{
 			count++;
 			continue ;
@@ -68,9 +68,9 @@ void	param_check(t_data_segment *data, char *str, int check[6], int status)
 		status = add_param(2, check, &(data->options.west_texture), tmp[1]);
 	if (ft_strcmp(tmp[0], "EA") == 0 && check[3] != 1)
 		status = add_param(3, check, &(data->options.east_texture), tmp[1]);
-	if (ft_strchr(tmp[0], 'F') && check[4] != 1)
+	if (ft_strcmp(tmp[0], "F") == 0 && check[4] != 1)
 		status = add_color(4, check, &(data->options.floor), tmp[1]);
-	if (ft_strchr(tmp[0], 'C') && check[5] != 1)
+	if (ft_strcmp(tmp[0], "C") == 0 && check[5] != 1)
 		status = add_color(5, check, &(data->options.ceiling), tmp[1]);
 	if (status != 1)
 	{
