@@ -8,9 +8,9 @@ LIBS = -I./includes/
 INCLUDE = -I /usr/local/include
 
 #	42
-# MLX = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
+MLX = -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 #	Home
-MLX = -L. -lmlx -framework OpenGL -framework AppKit
+# MLX = -L. -lmlx -framework OpenGL -framework AppKit
 
 #	Libft
 LIBFT_DIR = ./libft
@@ -20,7 +20,7 @@ LIBFT_SRC := ${shell find ${LIBFT_DIR} -name '*.c' -type f}
 #	Compiled directories
 SRC = src
 OBJ = obj
-SUBDIRS = main pars_part memory utils
+SUBDIRS = main pars_part memory utils windows
 
 #	Folder directions
 SRC_DIR = ${foreach dir, ${SUBDIRS}, ${addprefix ${SRC}/, ${dir}}}

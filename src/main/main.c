@@ -1,4 +1,5 @@
 #include "cub3D.h"
+# include "windows.h"
 
 int	main(int argc, char *argv[])
 {
@@ -9,6 +10,7 @@ int	main(int argc, char *argv[])
 		exit(printf(E_MALLOC));
 	if (pars_part(argc, argv[1], &data))
 		return (1);
+	creat_windows(data);
 	// system("leaks cub3D");
 	// printf("data.options.north_texture = %s\n", data->options.north_texture);
 	// printf("data.options.south_texture = %s\n", data->options.south_texture);

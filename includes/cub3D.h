@@ -9,9 +9,9 @@
 # include "def_struct.h"
 
 //  42
-// # include <mlx.h>
+# include <mlx.h>
 // HOME
-# include "mlx.h"
+// # include "mlx.h"
 
 //  Pars part
 int		open_file(char *file_name);
