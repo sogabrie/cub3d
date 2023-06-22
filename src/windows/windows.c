@@ -178,18 +178,18 @@ void	creat_line(t_param *ptr)
 
 int creat_wall(t_param *ptr)
 {
-	int	i = 0;
+	ptr->ray.i = 0;
 	create_c_f(ptr, create_trgb(1, ptr->data->options.ceiling.red, ptr->data->options.ceiling.green, ptr->data->options.ceiling.blue), 0);
 	create_c_f(ptr, create_trgb(1, ptr->data->options.floor.red, ptr->data->options.floor.green, ptr->data->options.floor.blue), ptr->y / 2);
 
-	while (i < ptr->x)
+	while (ptr->ray.i < ptr->x)
 	{
 		initcalizac(ptr);
 		run(ptr);
 		calc_wall(ptr);
 		find_tex_x(ptr);
 		creat_line(ptr);
-		++i;
+		++ptr->ray.i;
 	}
 
 	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img.img, 0, 0);
