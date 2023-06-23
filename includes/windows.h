@@ -14,7 +14,7 @@
 
 # define SPD_P 0.6
 # define SPD_R 0.2
-# define SPD_R_M 0.05
+# define SPD_R_M 0.03
 # define ESC 53
 # define KEY_W 13
 # define KEY_A 0

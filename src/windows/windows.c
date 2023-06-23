@@ -430,7 +430,33 @@ void	move_left_right(int key, t_param *ptr)
 	// creat_wall(ptr);
 }
 
-void	rotation(int key, t_param *ptr)
+// void	rotation(int key, t_param *ptr)
+// {
+// 	double	old_dirx;
+// 	double	old_planex;
+
+// 	old_dirx = ptr->plr.dir.x;
+// 	old_planex = ptr->plane.x;
+// 	if (key == LEFT)
+// 	{
+// 		ptr->plr.dir.x = ptr->plr.dir.x * cos(-SPD_R)
+// 			- ptr->plr.dir.y * sin(-SPD_R);
+// 		ptr->plr.dir.y = old_dirx * sin(-SPD_R) + ptr->plr.dir.y * cos(-SPD_R);
+// 		ptr->plane.x = ptr->plane.x * cos(-SPD_R) - ptr->plane.y * sin(-SPD_R);
+// 		ptr->plane.y = old_planex * sin(-SPD_R) + ptr->plane.y * cos(-SPD_R);
+// 	}
+// 	if (key == RIGHT)
+// 	{
+// 		ptr->plr.dir.x = ptr->plr.dir.x * cos(SPD_R)
+// 			- ptr->plr.dir.y * sin(SPD_R);
+// 		ptr->plr.dir.y = old_dirx * sin(SPD_R) + ptr->plr.dir.y * cos(SPD_R);
+// 		ptr->plane.x = ptr->plane.x * cos(SPD_R) - ptr->plane.y * sin(SPD_R);
+// 		ptr->plane.y = old_planex * sin(SPD_R) + ptr->plane.y * cos(SPD_R);
+// 	}
+// 	// creat_wall(ptr);
+// }
+
+void	rotation(int key, t_param *ptr, double rot)
 {
 	double	old_dirx;
 	double	old_planex;
@@ -439,45 +465,19 @@ void	rotation(int key, t_param *ptr)
 	old_planex = ptr->plane.x;
 	if (key == LEFT)
 	{
-		ptr->plr.dir.x = ptr->plr.dir.x * cos(-SPD_R)
-			- ptr->plr.dir.y * sin(-SPD_R);
-		ptr->plr.dir.y = old_dirx * sin(-SPD_R) + ptr->plr.dir.y * cos(-SPD_R);
-		ptr->plane.x = ptr->plane.x * cos(-SPD_R) - ptr->plane.y * sin(-SPD_R);
-		ptr->plane.y = old_planex * sin(-SPD_R) + ptr->plane.y * cos(-SPD_R);
+		ptr->plr.dir.x = ptr->plr.dir.x * cos(-rot)
+			- ptr->plr.dir.y * sin(-rot);
+		ptr->plr.dir.y = old_dirx * sin(-rot) + ptr->plr.dir.y * cos(-rot);
+		ptr->plane.x = ptr->plane.x * cos(-rot) - ptr->plane.y * sin(-rot);
+		ptr->plane.y = old_planex * sin(-rot) + ptr->plane.y * cos(-rot);
 	}
 	if (key == RIGHT)
 	{
-		ptr->plr.dir.x = ptr->plr.dir.x * cos(SPD_R)
-			- ptr->plr.dir.y * sin(SPD_R);
-		ptr->plr.dir.y = old_dirx * sin(SPD_R) + ptr->plr.dir.y * cos(SPD_R);
-		ptr->plane.x = ptr->plane.x * cos(SPD_R) - ptr->plane.y * sin(SPD_R);
-		ptr->plane.y = old_planex * sin(SPD_R) + ptr->plane.y * cos(SPD_R);
-	}
-	// creat_wall(ptr);
-}
-
-void	rotation_mous(int key, t_param *ptr)
-{
-	double	old_dirx;
-	double	old_planex;
-
-	old_dirx = ptr->plr.dir.x;
-	old_planex = ptr->plane.x;
-	if (key == LEFT)
-	{
-		ptr->plr.dir.x = ptr->plr.dir.x * cos(-SPD_R_M)
-			- ptr->plr.dir.y * sin(-SPD_R_M);
-		ptr->plr.dir.y = old_dirx * sin(-SPD_R_M) + ptr->plr.dir.y * cos(-SPD_R_M);
-		ptr->plane.x = ptr->plane.x * cos(-SPD_R_M) - ptr->plane.y * sin(-SPD_R_M);
-		ptr->plane.y = old_planex * sin(-SPD_R_M) + ptr->plane.y * cos(-SPD_R_M);
-	}
-	if (key == RIGHT)
-	{
-		ptr->plr.dir.x = ptr->plr.dir.x * cos(SPD_R_M)
-			- ptr->plr.dir.y * sin(SPD_R_M);
-		ptr->plr.dir.y = old_dirx * sin(SPD_R_M) + ptr->plr.dir.y * cos(SPD_R_M);
-		ptr->plane.x = ptr->plane.x * cos(SPD_R_M) - ptr->plane.y * sin(SPD_R_M);
-		ptr->plane.y = old_planex * sin(SPD_R_M) + ptr->plane.y * cos(SPD_R_M);
+		ptr->plr.dir.x = ptr->plr.dir.x * cos(rot)
+			- ptr->plr.dir.y * sin(rot);
+		ptr->plr.dir.y = old_dirx * sin(rot) + ptr->plr.dir.y * cos(rot);
+		ptr->plane.x = ptr->plane.x * cos(rot) - ptr->plane.y * sin(rot);
+		ptr->plane.y = old_planex * sin(rot) + ptr->plane.y * cos(rot);
 	}
 	// creat_wall(ptr);
 }
@@ -485,14 +485,14 @@ void	rotation_mous(int key, t_param *ptr)
 int	deal_mous(int x, int y, t_param *ptr)
 {
 	int key;
-	if (x < ptr->pos_mous.x)
+	if (x < ptr->pos_mous.x && x < ptr->x / 2)
 		key = LEFT;
-	else
+	else if ( x > ptr->pos_mous.x && x > ptr->x / 2)
 		key = RIGHT;
 	ptr->pos_mous.x = x;
 	printf("X = %d Y = %d\n", x, y);
 	if (key == LEFT || key == RIGHT)
-		rotation_mous(key, ptr);
+		rotation(key, ptr, SPD_R_M);
 	return (0);
 }
 
@@ -506,7 +506,7 @@ int	deal_key(int key, t_param *ptr)
 	else if (key == KEY_A || key == KEY_D)
 		move_left_right(key, ptr);
 	else if (key == LEFT || key == RIGHT)
-		rotation(key, ptr);
+		rotation(key, ptr, SPD_R);
 	return (0);
 }
 
