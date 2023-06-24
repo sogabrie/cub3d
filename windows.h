@@ -3,6 +3,7 @@
 
 # define SPD_P 0.6
 # define SPD_R 0.2
+# define SPD_R_M 0.03
 # define ESC 53
 # define KEY_W 119
 # define KEY_A 97
@@ -10,6 +11,17 @@
 # define KEY_D 100
 # define LEFT 65361
 # define RIGHT 65363
+
+// # define SPD_P 0.6
+// # define SPD_R 0.2
+// # define SPD_R_M 0.03
+// # define ESC 53
+// # define KEY_W 13
+// # define KEY_A 0
+// # define KEY_S 1
+// # define KEY_D 2
+// # define LEFT 123
+// # define RIGHT 124
 
 # include <string.h>
 # include <mlx.h>
@@ -28,6 +40,7 @@ typedef struct s_map
 	int		*so;
 	int		*we;
 	int		*ea;
+	int		*an1;
 	int		f;
 	int		c;
 	int		x;
@@ -81,6 +94,7 @@ typedef struct s_param
 	t_data			img;
     t_colors		col;
 	t_point			wind;
+	t_point			pos_mous;
 	t_map			map;
 	double			x;
 	double			y;

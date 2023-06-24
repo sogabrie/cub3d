@@ -17,9 +17,9 @@ int	pars_map(char **map, int i, int j)
 		{
 			if (ft_strchr("NSEW	", map[i][j]))
 				c_count++;
-			if (!ft_strchr("10 NSEWD\n", map[i][j]))
+			if (!ft_strchr("105 NSEWD\n", map[i][j]))
 				return (1);
-			if (ft_strchr("0NSEWD", map[i][j]) && check_walls(map, i, j))
+			if (ft_strchr("05NSEWD", map[i][j]) && check_walls(map, i, j))
 				return (1);
 		}
 		j = -1;
