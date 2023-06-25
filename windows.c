@@ -5,25 +5,16 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int *)dst = color;
-// }
 void	my_mlx_pixel_put(t_param *ptr, int x, int y, int color)
 {
 	char	*dst;
-	
-	// write(1, "MMM_0\n", 8);
-	// printf("X = %d Y = %d \n", x, y);
+
 	if (x >= 0 && x < ptr->x && y >= 0 && y < ptr->y)
 	{
-		dst = ptr->img.addr + (y * ptr->img.line_length + x * (ptr->img.bits_per_pixel / 8));
+		dst = ptr->img.addr + (y * ptr->img.line_length + x \
+		* (ptr->img.bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
-	// write(1, "MMM_9\n", 8);
 }
 
 int	ft_close(t_param *ptr)
@@ -41,7 +32,7 @@ void	create_c_f(t_param *ptr, int color, int start)
 	int	k;
 
 	i = 0;
-	while (i < (ptr->y  / 2))
+	while (i < (ptr->y / 2))
 	{
 		k = 0;
 		while (k < ptr->x)
@@ -52,8 +43,6 @@ void	create_c_f(t_param *ptr, int color, int start)
 		i++;
 	}
 }
-
-///
 
 int	ft_isspace(char c)
 {
@@ -85,8 +74,6 @@ void	init2_str(t_param *ptr)
 
 void	init_str(t_param *ptr)
 {
-	// ptr->map.map = NULL;
-	// ptr->map.height = 0;
 	ptr->pos_mous.x = ptr->x / 2;
 	ptr->pos_mous.y = ptr->y / 2;
 	ptr->map.no = NULL;
@@ -131,7 +118,7 @@ void	initcalizac(t_param *ptr)
 	}
 }
 
-void run(t_param *ptr)
+void	run(t_param *ptr)
 {
 	int	collision;
 
@@ -153,36 +140,6 @@ void run(t_param *ptr)
 		if (ptr->data->map[(int)ptr->map.y][(int)ptr->map.x] == '1')
 			collision = 1;
 	}
-}
-
-int run_2(t_param *ptr)
-{
-	int	collision;
-
-	collision = 0;
-	while (!collision)
-	{
-		if (ptr->ray.side.x < ptr->ray.side.y)
-		{
-			ptr->ray.side.x += ptr->ray.delta.x;
-			ptr->map.x += ptr->ray.step_x;
-			ptr->ray.vert_hit = 0;
-		}
-		else
-		{
-			ptr->ray.side.y += ptr->ray.delta.y;
-			ptr->map.y += ptr->ray.step_y;
-			ptr->ray.vert_hit = 1;
-		}
-		// write(1,"MAP_0\n", 6);
-		// printf("map.x == %d map.y = %d\n",(int)ptr->map.y, (int)ptr->map.x);
-		// write(1,"MAP_1\n", 6);
-		if (ptr->map.y < 0 || ptr->map.y > 12 || ptr->map.x < 0 || ptr->map.x > 13)
-			return (0);
-		if (ptr->data->map[(int)ptr->map.y][(int)ptr->map.x] == '5')
-			collision = 1;
-	}
-	return (1);
 }
 
 void	calc_wall(t_param *ptr)
@@ -214,65 +171,21 @@ int	find(t_param *ptr, int x, int y)
 {
 	int	*tex;
 
-	// write(1, "tttt_0\n", 8);
 	if (!ptr->ray.vert_hit)
 	{
-		// write(1, "tttt_1\n", 8);
 		if (ptr->ray.dir.x >= 0)
 			tex = ptr->map.ea;
 		else
 			tex = ptr->map.we;
-		// write(1, "tttt_2\n", 8);
 	}
 	else
 	{
-		// write(1, "tttt_3\n", 8);
 		if (ptr->ray.dir.y >= 0)
 			tex = ptr->map.so;
 		else
 			tex = ptr->map.no;
-		// write(1, "tttt_4\n", 8);
 	}
-	// printf("64 = %d \n", 64 * y + x);
-	// write(1, "tttt_5\n", 8);
 	return (tex[64 * y + x]);
-}
-int	find_2(t_param *ptr, int x, int y)
-{
-	int	*tex;
-	// write (1, "COLOR_1\n",9);
-	// printf("x = %d y = %d \n", x, y);
-	// tex = ptr->map.an1;
-	// write (1, "COLOR_2\n",9);
-	// for (int i = 0; i < 5000; i++)
-	// {
-	// 	printf("i = %d  map.an1 = %d \n", i, ptr->map.an1[i]);
-	// }
-	
-	// write(1, "tttt_0\n", 8);
-	// if (!ptr->ray.vert_hit)
-	// {
-	// 	// write(1, "tttt_1\n", 8);
-	// 	if (ptr->ray.dir.x >= 0)
-	// 		tex = ptr->map.ea;
-	// 	else
-	// 		tex = ptr->map.we;
-	// 	// write(1, "tttt_2\n", 8);
-	// }
-	// else
-	// {
-	// 	// write(1, "tttt_3\n", 8);
-	// 	if (ptr->ray.dir.y >= 0)
-	// 		tex = ptr->map.so;
-	// 	else
-	// 		tex = ptr->map.no;
-	// 	// write(1, "tttt_4\n", 8);
-	// }
-	// printf("64 = %d \n", 64 * y + x);
-	// write(1, "tttt_5\n", 8);
-	int color = ptr->map.an1[64 * y + x];
-	// write (1, "COLOR_3\n",9);
-	return (color);
 }
 
 void	creat_line(t_param *ptr)
@@ -281,55 +194,17 @@ void	creat_line(t_param *ptr)
 	int		color;
 	int		i;
 
-	// write(1, "bbbb_0\n", 8);
 	scale = 64.0 / (double)ptr->wall.height;
-	// write(1, "bbbb_1\n", 8);
 	ptr->wall.tex_y = 0;
-	// write(1, "bbbb_2\n", 8);
 	i = 0;
-	// write(1, "bbbb_3\n", 8);
 	while (i < ptr->wall.height)
 	{
-		// write(1, "bbbb_4\n", 8);
 		color = find(ptr, ptr->wall.tex_x, (int)ptr->wall.tex_y);
-		// write(1, "bbbb_5\n", 8);
 		my_mlx_pixel_put(ptr, ptr->ray.i, ptr->wall.top + i, color);
-		// write(1, "bbbb_6\n", 8);
 		ptr->wall.tex_y += scale;
-		// write(1, "bbbb_7\n", 8);
 		i++;
 	}
-	// write(1, "bbbb_9\n", 8);
 }
-
-void	creat_line_2(t_param *ptr)
-{
-	double	scale;
-	int		color;
-	int		i;
-
-	// write(1, "bbbb_0\n", 8);
-	scale = 64.0 / (double)ptr->wall.height;
-	// write(1, "bbbb_1\n", 8);
-	ptr->wall.tex_y = 0;
-	// write(1, "bbbb_2\n", 8);
-	i = 0;
-	// write(1, "bbbb_3\n", 8);
-	while (i < ptr->wall.height)
-	{
-		// write(1, "bbbb_4\n", 8);
-		color = find_2(ptr, ptr->wall.tex_x, (int)ptr->wall.tex_y);
-		// write(1, "bbbb_5\n", 8);
-		my_mlx_pixel_put(ptr, ptr->ray.i, ptr->wall.top + i, color);
-		// write(1, "bbbb_6\n", 8);
-		ptr->wall.tex_y += scale;
-		// write(1, "bbbb_7\n", 8);
-		i++;
-	}
-	// write(1, "bbbb_9\n", 8);
-}
-
-///
 
 int	check_xpm(const char *line)
 {
@@ -372,36 +247,17 @@ int	parse_texture(t_param *ptr, int **addr, char *line, int i)
 	void	*tex_img;
 	int		arg[2];
 
-	// if (ptr->map.map || *addr)
-	// 	return (-1);
-	// while (ft_isspace(*++line))
-	// 	i++;
-	// while (line[i])
-	// 	i++;
-	// while (ft_isspace(line[i - 1]))
-	// 	i--;
-	// if (line[i] != '\0')
-	// 	line[i] = '\0';
-	// write(1, "iii_0\n", 6);
 	if (check_xpm(line))
 		return (-1);
-	// write(1, "iii_1\n", 6);
 	tex_img = mlx_xpm_file_to_image(ptr->mlx_ptr, line, &arg[0], &arg[1]);
-	// write(1, "iii_2\n", 6);
-
 	if (arg[0] != 64 || arg[1] != 64 || !tex_img)
 	{
-		// write(1, "iii_3\n", 6);
 		if (tex_img)
 			mlx_destroy_image(ptr->mlx_ptr, tex_img);
 		return (-1);
-		// write(1, "iii_4\n", 6);
 	}
-	// write(1, "iii_5\n", 6);
 	copy_texture(addr, tex_img);
-	// write(1, "iii_6\n", 6);
 	mlx_destroy_image(ptr->mlx_ptr, tex_img);
-	// write(1, "iii_7\n", 6);
 	return (1);
 }
 
@@ -451,64 +307,23 @@ void	minimap(t_param *ptr)
 		(int)ptr->plr.pos.x * 12, (int)ptr->plr.pos.y * 12);
 }
 
-int creat_wall(t_param *ptr)
+int	creat_wall(t_param *ptr)
 {
 	ptr->ray.i = 0;
-	create_c_f(ptr, create_trgb(1, ptr->data->options.ceiling.red, ptr->data->options.ceiling.green, ptr->data->options.ceiling.blue), 0);
-	create_c_f(ptr, create_trgb(1, ptr->data->options.floor.red, ptr->data->options.floor.green, ptr->data->options.floor.blue), ptr->y / 2);
-
+	create_c_f(ptr, create_trgb(1, ptr->data->options.ceiling.red, \
+	ptr->data->options.ceiling.green, ptr->data->options.ceiling.blue), 0);
+	create_c_f(ptr, create_trgb(1, ptr->data->options.floor.red, \
+	ptr->data->options.floor.green, ptr->data->options.floor.blue), ptr->y / 2);
 	while (ptr->ray.i < ptr->x)
 	{
-		// write(1, "aaaa_0\n", 8);
 		initcalizac(ptr);
-		// write(1, "aaaa_1\n", 8);
 		run(ptr);
-		// write(1, "aaaa_2\n", 8);
 		calc_wall(ptr);
-		// write(1, "aaaa_3\n", 8);
 		find_tex_x(ptr);
-		// write(1, "aaaa_4\n", 8);
 		creat_line(ptr);
-		// write(1, "aaaa_6\n", 8);
 		++ptr->ray.i;
 	}
-
 	minimap(ptr);
-	// mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img.img, 0, 0);
-	return (0);
-}
-
-int creat_anim(t_param *ptr)
-{
-	ptr->ray.i = 0;
-
-	while (ptr->ray.i < ptr->x)
-	{
-		// write(1, "aaaa_0\n", 8);
-
-		initcalizac(ptr);
-
-		// write(1, "aaaa_1\n", 8);
-
-		if (run_2(ptr))
-		{
-			// write(1, "aaaa_2\n", 8);
-
-			calc_wall(ptr);
-
-			// write(1, "aaaa_3\n", 8);
-
-			find_tex_x(ptr);
-
-			// write(1, "aaaa_4\n", 8);
-
-			creat_line_2(ptr);
-
-			// write(1, "aaaa_6\n", 8);
-		}
-		++ptr->ray.i;
-	}
-	// mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img.img, 0, 0);
 	return (0);
 }
 
@@ -532,7 +347,6 @@ void	move_up_down(int key, t_param *ptr)
 			[(int)(ptr->plr.pos.x)] == '0')
 			ptr->plr.pos.y -= (ptr->plr.dir.y * SPD_P);
 	}
-	// creat_wall(ptr);
 }
 
 void	move_left_right(int key, t_param *ptr)
@@ -555,34 +369,7 @@ void	move_left_right(int key, t_param *ptr)
 			[(int)(ptr->plr.pos.x)] == '0')
 			ptr->plr.pos.y -= ptr->plane.y * SPD_P;
 	}
-	// creat_wall(ptr);
 }
-
-// void	rotation(int key, t_param *ptr)
-// {
-// 	double	old_dirx;
-// 	double	old_planex;
-
-// 	old_dirx = ptr->plr.dir.x;
-// 	old_planex = ptr->plane.x;
-// 	if (key == LEFT)
-// 	{
-// 		ptr->plr.dir.x = ptr->plr.dir.x * cos(-SPD_R)
-// 			- ptr->plr.dir.y * sin(-SPD_R);
-// 		ptr->plr.dir.y = old_dirx * sin(-SPD_R) + ptr->plr.dir.y * cos(-SPD_R);
-// 		ptr->plane.x = ptr->plane.x * cos(-SPD_R) - ptr->plane.y * sin(-SPD_R);
-// 		ptr->plane.y = old_planex * sin(-SPD_R) + ptr->plane.y * cos(-SPD_R);
-// 	}
-// 	if (key == RIGHT)
-// 	{
-// 		ptr->plr.dir.x = ptr->plr.dir.x * cos(SPD_R)
-// 			- ptr->plr.dir.y * sin(SPD_R);
-// 		ptr->plr.dir.y = old_dirx * sin(SPD_R) + ptr->plr.dir.y * cos(SPD_R);
-// 		ptr->plane.x = ptr->plane.x * cos(SPD_R) - ptr->plane.y * sin(SPD_R);
-// 		ptr->plane.y = old_planex * sin(SPD_R) + ptr->plane.y * cos(SPD_R);
-// 	}
-// 	// creat_wall(ptr);
-// }
 
 void	rotation(int key, t_param *ptr, double rot)
 {
@@ -607,18 +394,18 @@ void	rotation(int key, t_param *ptr, double rot)
 		ptr->plane.x = ptr->plane.x * cos(rot) - ptr->plane.y * sin(rot);
 		ptr->plane.y = old_planex * sin(rot) + ptr->plane.y * cos(rot);
 	}
-	// creat_wall(ptr);
 }
 
 int	deal_mous(int x, int y, t_param *ptr)
 {
-	int key;
+	int	key;
+
+	(void)y;
 	if (x < ptr->pos_mous.x && x < ptr->x / 2)
 		key = LEFT;
-	else if ( x > ptr->pos_mous.x && x > ptr->x / 2)
+	else if (x > ptr->pos_mous.x && x > ptr->x / 2)
 		key = RIGHT;
 	ptr->pos_mous.x = x;
-	printf("X = %d Y = %d\n", x, y);
 	if (key == LEFT || key == RIGHT)
 		rotation(key, ptr, SPD_R_M);
 	return (0);
@@ -626,8 +413,7 @@ int	deal_mous(int x, int y, t_param *ptr)
 
 int	deal_key(int key, t_param *ptr)
 {
-	printf("maus key = %d\n",key);
-	if (key == 53)
+	if (key == ESC)
 		ft_close(ptr);
 	else if (key == KEY_W || key == KEY_S)
 		move_up_down(key, ptr);
@@ -640,37 +426,8 @@ int	deal_key(int key, t_param *ptr)
 
 int	hooks(t_param *ptr)
 {
-	//  t_param *ptr = pt;
-	// mlx_mouse_hook(ptr->win_ptr, deal_mous, ptr);
-	// ptr->data->options.ceiling.red = (ptr->data->options.ceiling.red + 50) % 255;
-	// ptr->data->options.ceiling.green = (ptr->data->options.ceiling.green + 50) % 255;
-	// ptr->data->options.ceiling.blue = (ptr->data->options.ceiling.blue + 50) % 255;
-
-	// ptr->data->options.floor.red = (ptr->data->options.floor.red + 50) % 255;
-	// ptr->data->options.floor.green = (ptr->data->options.floor.green + 50) % 255;
-	// ptr->data->options.floor.blue = (ptr->data->options.floor.blue + 50) % 255;
-
-	// ptr->map.no = NULL;
-	// parse_texture(ptr, ptr->map.no, ptr->data->options.north_texture, 0);
-	// parse_texture(ptr, ptr->map.so, ptr->data->options.south_texture, 0);
-	// parse_texture(ptr, ptr->map.ea, ptr->data->options.east_texture, 0);
-	// parse_texture(ptr, ptr->map.we, ptr->data->options.west_texture, 0);
-
-	// parse_texture(ptr, &ptr->map.no, "./north.xpm", 0);
-	// parse_texture(ptr, &ptr->map.so, "./south.xpm", 0);
-	// parse_texture(ptr, &ptr->map.ea, "./east.xpm", 0);
-	// parse_texture(ptr, &ptr->map.we, "./west.xpm", 0);
-
-	// printf("ptr->map.no = %p\n" , ptr->map.no);
-
 	creat_wall(ptr);
-	creat_anim(ptr);
-
 	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img.img, 0, 0);
-	// printf("aaaaaaaaaaaaaaaaaaaa\n");
-	// mlx_key_hook(ptr->win_ptr, deal_key, ptr);
-	// mlx_hook(ptr->win_ptr, 17, 1L << 17, ft_close, ptr);
-	// mlx_loop(ptr->mlx_ptr);
 	return (0);
 }
 
@@ -730,46 +487,27 @@ int	set_position(t_param *ptr)
 
 int	creat_windows(t_data_segment *data)
 {
-    t_param	ptr;
-    ptr.x = 1000;
-    ptr.y = 500;
-	ptr.data = data;
+	t_param	ptr;
 
+	ptr.x = 1000;
+	ptr.y = 500;
+	ptr.data = data;
 	ptr.mlx_ptr = mlx_init();
 	ptr.win_ptr = mlx_new_window(ptr.mlx_ptr, ptr.x, ptr.y, "cub3D");
 	ptr.img.img = mlx_new_image(ptr.mlx_ptr, ptr.x, ptr.y);
 	ptr.img.addr = mlx_get_data_addr(ptr.img.img, &(ptr.img.bits_per_pixel), \
 					&(ptr.img.line_length), &(ptr.img.endian));
-
-
-	printf("%s\n", data->options.east_texture);
-	printf("%s\n", data->options.north_texture);
-	printf("%s\n", data->options.south_texture);
-	printf("%s\n", data->options.west_texture);
 	init_str(&ptr);
 	set_position(&ptr);
-
 	parse_texture(&ptr, &ptr.map.no, data->options.east_texture, 0);
 	parse_texture(&ptr, &ptr.map.so, data->options.north_texture, 0);
 	parse_texture(&ptr, &ptr.map.ea, data->options.south_texture, 0);
 	parse_texture(&ptr, &ptr.map.we, data->options.west_texture, 0);
-	printf("pars = %d \n" ,parse_texture(&ptr, &ptr.map.an1, "./15.xpm", 0));
-
-	// int i = 0;
-	// while (ptr.map.no[i] != 0)
-	// {
-	// 	printf("%d ", ptr.map.no[i]);
-	// 	++i;
-	// }
-	// creat_wall(&ptr);
-	// mlx_key_hook(ptr.win_ptr, deal_key, &ptr);
-	mlx_loop_hook( ptr.mlx_ptr, hooks, &ptr);
-	// mlx_mouse_hook(ptr.win_ptr, deal_mous, &ptr);
-	mlx_hook(ptr.win_ptr, 2, 1L<<0, &deal_key, &ptr);
-	mlx_hook(ptr.win_ptr, 6, 1L<<0, &deal_mous, &ptr);
+	mlx_loop_hook(ptr.mlx_ptr, hooks, &ptr);
+	mlx_hook(ptr.win_ptr, 2, 1L << 0, &deal_key, &ptr);
+	mlx_hook(ptr.win_ptr, 6, 1L << 0, &deal_mous, &ptr);
 	mlx_hook(ptr.win_ptr, 17, 1L << 17, ft_close, &ptr);
 	mlx_loop(ptr.mlx_ptr);
 	ft_close(&ptr);
-
-    return (0);
+	return (0);
 }

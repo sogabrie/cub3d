@@ -278,36 +278,18 @@ int	parse_texture(t_param *ptr, int **addr, char *line, int i)
 	void	*tex_img;
 	int		arg[2];
 
-	// if (ptr->map.map || *addr)
-	// 	return (-1);
-	// while (ft_isspace(*++line))
-	// 	i++;
-	// while (line[i])
-	// 	i++;
-	// while (ft_isspace(line[i - 1]))
-	// 	i--;
-	// if (line[i] != '\0')
-	// 	line[i] = '\0';
-	// write(1, "iii_0\n", 6);
 	if (check_xpm(line))
 		return (-1);
-	// write(1, "iii_1\n", 6);
 	tex_img = mlx_xpm_file_to_image(ptr->mlx_ptr, line, &arg[0], &arg[1]);
-	// write(1, "iii_2\n", 6);
 
 	if (arg[0] != 64 || arg[1] != 64 || !tex_img)
 	{
-		// write(1, "iii_3\n", 6);
 		if (tex_img)
 			mlx_destroy_image(ptr->mlx_ptr, tex_img);
 		return (-1);
-		// write(1, "iii_4\n", 6);
 	}
-	// write(1, "iii_5\n", 6);
 	copy_texture(addr, tex_img);
-	// write(1, "iii_6\n", 6);
 	mlx_destroy_image(ptr->mlx_ptr, tex_img);
-	// write(1, "iii_7\n", 6);
 	return (1);
 }
 
@@ -365,9 +347,7 @@ int creat_wall(t_param *ptr)
 
 	while (ptr->ray.i < ptr->x)
 	{
-		// write(1, "aaaa_0\n", 8);
 		initcalizac(ptr);
-		// write(1, "aaaa_1\n", 8);
 		run(ptr);
 		// write(1, "aaaa_2\n", 8);
 		calc_wall(ptr);
