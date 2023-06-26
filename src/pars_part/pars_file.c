@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pars_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 16:13:50 by sogabrie          #+#    #+#             */
+/*   Updated: 2023/06/26 16:24:16 by sogabrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D.h"
 
 int	open_file(char *file_name)
@@ -92,7 +104,9 @@ int	pars_part(int argc, char *argv, t_data_segment **data)
 	save_parameters(fd, *data);
 	save_map(fd, *data);
 	if (pars_map((*data)->map, -1, -1))
+	{
 		exit(printf(E_MAP_CONF));
+	}
 	(*data)->y_axis = y_counts((*data)->map);
 	(*data)->x_axis = max_x_axis((*data)->map);
 	close(fd);
