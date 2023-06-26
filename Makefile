@@ -20,7 +20,7 @@ LIBFT_SRC := ${shell find ${LIBFT_DIR} -name '*.c' -type f}
 #	Compiled directories
 SRC = src
 OBJ = obj
-SUBDIRS = main pars_part memory utils
+SUBDIRS = main pars_part memory utils windows
 
 #	Folder directions
 SRC_DIR = ${foreach dir, ${SUBDIRS}, ${addprefix ${SRC}/, ${dir}}}
