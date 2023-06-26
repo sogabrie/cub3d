@@ -6,7 +6,7 @@
 /*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:46:51 by sogabrie          #+#    #+#             */
-/*   Updated: 2023/06/26 15:47:11 by sogabrie         ###   ########.fr       */
+/*   Updated: 2023/06/26 15:55:39 by sogabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -442,7 +442,11 @@ int	hooks(t_param *ptr)
 	mlx_put_image_to_window(ptr->mlx_ptr, ptr->win_ptr, ptr->img.img, 0, 0);
 	return (0);
 }
-
+/// @brief
+/// @param ptr 
+/// @param pov 
+/// @param i 
+/// @param k 
 void	set_direction(t_param *ptr, char pov, double i, double k)
 {
 	ptr->plr.pos.x = k + 0.5;
