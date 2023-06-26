@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aafrikya <aafrikya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:14:04 by sogabrie          #+#    #+#             */
-/*   Updated: 2023/06/26 16:14:05 by sogabrie         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:04:18 by aafrikya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,9 @@ void	count_tmp(char **tmp)
 	}
 	if (count != 2)
 		exit(printf(E_CONFIGURATION));
+}
+
+void	print_error(void)
+{
+	exit(printf(T_E));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   def_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aafrikya <aafrikya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 16:12:18 by sogabrie          #+#    #+#             */
-/*   Updated: 2023/06/26 16:12:19 by sogabrie         ###   ########.fr       */
+/*   Updated: 2023/06/26 17:04:38 by aafrikya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define E_FILE_EMPTY "Error\n! .cub file is empty !\n"
 # define E_CONFIGURATION "Error\n! Wrong file configuration !\n"
 # define E_MAP_CONF "Error\n! Incorrect map configuration !\n"
+# define T_E "Error\n! Texture error !\n"
 
 typedef struct s_colors {
 	int	red;
