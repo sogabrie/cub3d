@@ -6,7 +6,7 @@
 /*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:54:25 by sogabrie          #+#    #+#             */
-/*   Updated: 2023/06/26 16:00:20 by sogabrie         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:10:46 by sogabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ typedef struct s_point
 	double			y;
 }					t_point;
 
-typedef struct 		s_player {
+typedef struct s_player
+{
 	t_point			pos;
 	t_point			dir;
 }					t_player;
@@ -93,7 +94,7 @@ typedef struct s_param
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_data			img;
-    t_colors		col;
+	t_colors		col;
 	t_point			wind;
 	t_point			pos_mous;
 	t_map			map;
@@ -105,7 +106,6 @@ typedef struct s_param
 	t_point			plane;
 	t_data_segment	*data;
 }					t_param;
-
 
 int		create_trgb(int t, int r, int g, int b);
 void	my_mlx_pixel_put(t_param *ptr, int x, int y, int color);

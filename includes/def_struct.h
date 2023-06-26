@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   def_struct.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/26 16:12:18 by sogabrie          #+#    #+#             */
+/*   Updated: 2023/06/26 16:12:19 by sogabrie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEF_STRUCT_H
 # define DEF_STRUCT_H
 
@@ -31,9 +43,6 @@ typedef struct s_data_segment {
 	t_options	options;
 	int			y_axis;
 	int			x_axis;
-	// ..
-	// Continue..
-	// ..
 }	t_data_segment;
 
 #endif
