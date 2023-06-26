@@ -6,7 +6,7 @@
 /*   By: sogabrie <sogabrie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 15:54:25 by sogabrie          #+#    #+#             */
-/*   Updated: 2023/06/26 15:55:12 by sogabrie         ###   ########.fr       */
+/*   Updated: 2023/06/26 16:00:20 by sogabrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	move_up_down(int key, t_param *ptr);
 void	move_left_right(int key, t_param *ptr);
 void	rotation(int key, t_param *ptr, double rot);
 int		deal_mous(int x, int y, t_param *ptr);
+int		deal_key(int key, t_param *ptr);
 int		hooks(t_param *ptr);
 void	set_direction(t_param *ptr, char pov, double i, double k);
 int		set_position(t_param *ptr);
